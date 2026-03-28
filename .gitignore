@@ -1,0 +1,6 @@
+*.pdf
+weights/
+output/
+logs/
+__pycache__/
+.venv/

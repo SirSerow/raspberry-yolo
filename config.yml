@@ -1,0 +1,63 @@
+camera:
+  # auto: try Picamera2 first, then OpenCV fallback.
+  # picamera2: force Raspberry Pi CSI camera via Picamera2.
+  # opencv: force OpenCV VideoCapture backend.
+  backend: auto
+
+  # Camera source for OpenCV backend (device index, video path, or stream URL).
+  # For Picamera2 backend this value is ignored.
+  source: 0
+
+  # Frame width and height to capture from the camera.
+  width: 640
+  height: 480
+
+  # Frames per second to capture from the camera.
+  fps: 30
+
+
+model:
+  # Ultralytics model name. If extension is omitted, .pt is assumed.
+  model_name: yolo11n
+
+  # If this points to a file, that file is used.
+  # If this points to a directory, <weights_path>/<model_name>.pt is used when present.
+  # Otherwise model_name is resolved by Ultralytics and may be auto-downloaded.
+  weights_path: weights
+
+  # Confidence threshold for object detection.
+  conf_threshold: 0.5
+
+  # Non-maximum suppression threshold for filtering overlapping bounding boxes.
+  nms_threshold: 0.4
+
+  # Whether to measure and display the inference FPS (frames per second) in the console.
+  measure_inference_fps: True
+
+
+output:
+  # Not implemented in MVP (ignored with warning).
+  display: False
+
+  # Directory to save outputs (CSV in MVP). Set to null only if save_csv is False.
+  output_dir: output
+
+  # Not implemented in MVP (ignored with warning).
+  save_video: False
+
+  # Save CSV with detection rows.
+  save_csv: True
+
+
+logging:
+  # Directory to save log files.
+  log_dir: logs
+
+  # Log level (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL).
+  log_level: DEBUG
+
+  # Whether to log inference times for each frame.
+  log_inference_times: True
+
+  # Log rotation information - whether to enable log rotation to prevent log files from growing indefinitely.
+  log_rotation: True
