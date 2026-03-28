@@ -60,6 +60,8 @@ Build:
 docker build -t raspi-cam-yolo .
 ```
 
+If you change the Dockerfile or requirements, rebuild the image before running again.
+
 Run with USB/OpenCV camera (`/dev/video0`):
 
 ```bash
