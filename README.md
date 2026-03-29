@@ -69,10 +69,10 @@ docker run --rm -it \
   --device /dev/video0:/dev/video0 \
   -v "$(pwd)/output:/app/output" \
   -v "$(pwd)/logs:/app/logs" \
-  raspi-cam-yolo python main.py --config config.yml
+  raspi-cam-yolo python3 main.py --config config.yml
 ```
 
-Run with CSI/Picamera2 typically requires broader device/libcamera access on Pi:
+Run with CSI/Picamera2. Set `camera.backend: picamera2` in `config.yml` and use broader device/libcamera access on Pi:
 
 ```bash
 docker run --rm -it --privileged \
@@ -80,10 +80,19 @@ docker run --rm -it --privileged \
   -v /dev:/dev \
   -v "$(pwd)/output:/app/output" \
   -v "$(pwd)/logs:/app/logs" \
-  raspi-cam-yolo python main.py --config config.yml
+  raspi-cam-yolo python3 main.py --config config.yml
 ```
 
-If CSI is unavailable in container, set `camera.backend: opencv` and use a USB device source.
+CSI camera smoke test in the container:
+
+```bash
+docker run --rm -it --privileged \
+  -v /run/udev:/run/udev:ro \
+  -v /dev:/dev \
+  raspi-cam-yolo python3 tests/camera_smoke_test.py --backend picamera2
+```
+
+If CSI is unavailable in container, set `camera.backend: opencv` and use a USB device source instead.
 
 ## CSV Output
 

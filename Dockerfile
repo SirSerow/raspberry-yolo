@@ -1,8 +1,14 @@
-FROM python:3.12-bookworm
+FROM debian:bookworm
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    python3-venv \
+    python3-picamera2 \
+    python3-libcamera \
+    libcamera-apps \
     build-essential \
     gcc \
     libgl1 \
@@ -10,8 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --break-system-packages --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "main.py"]
+CMD ["python3", "main.py", "--config", "config.yml"]
