@@ -62,6 +62,7 @@ docker build -t raspi-cam-yolo .
 
 If you change the Dockerfile or requirements, rebuild the image before running again.
 The CSI/Picamera2 image build also pulls packages from the Raspberry Pi package archive.
+The repo includes a `.dockerignore` so local virtualenvs, logs, outputs, and weights are not copied into the image context.
 
 Run with USB/OpenCV camera (`/dev/video0`):
 
